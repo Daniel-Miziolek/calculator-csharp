@@ -1,0 +1,14 @@
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\bin\Debug\net8.0\AdvanceCalculator.exe
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\bin\Debug\net8.0\AdvanceCalculator.deps.json
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\bin\Debug\net8.0\AdvanceCalculator.runtimeconfig.json
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\bin\Debug\net8.0\AdvanceCalculator.dll
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\bin\Debug\net8.0\AdvanceCalculator.pdb
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\obj\Debug\net8.0\AdvanceCalculator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\obj\Debug\net8.0\AdvanceCalculator.AssemblyInfoInputs.cache
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\obj\Debug\net8.0\AdvanceCalculator.AssemblyInfo.cs
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\obj\Debug\net8.0\AdvanceCalculator.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\obj\Debug\net8.0\AdvanceCalculator.dll
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\obj\Debug\net8.0\refint\AdvanceCalculator.dll
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\obj\Debug\net8.0\AdvanceCalculator.pdb
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\obj\Debug\net8.0\AdvanceCalculator.genruntimeconfig.cache
+C:\Users\Daniel\Desktop\C#_Console\AdvanceCalculator\AdvanceCalculator\obj\Debug\net8.0\ref\AdvanceCalculator.dll
