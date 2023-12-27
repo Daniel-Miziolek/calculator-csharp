@@ -6,7 +6,9 @@ class Kalkulator
     {
         while (true)
         {
-            Console.WriteLine("Advance calkulator");
+            Console.WriteLine("--------------------");
+            Console.WriteLine("|Advance calkulator|");
+            Console.WriteLine("--------------------");
             Console.WriteLine("1. Addition");
             Console.WriteLine("2. Subtraction");
             Console.WriteLine("3. Multiplication");
@@ -14,11 +16,12 @@ class Kalkulator
             Console.WriteLine("5. Exponentiation");
             Console.WriteLine("6. Root");
             Console.WriteLine("7. Logarithm");
-            Console.WriteLine("8. Exit");
+            Console.WriteLine("8. The absolute value(|A|)");
+            Console.WriteLine("9. Exit");
              
             Console.Write("Select an operation (1-8): ");
             int wybor = Convert.ToInt32(Console.ReadLine());
-
+            
             double liczba1;
             double liczba2;
             double wynik = 0;
@@ -51,6 +54,13 @@ class Kalkulator
             }
             else if (wybor == 8)
             {
+                Console.Write("Enter the number: ");
+                liczba1 = Convert.ToDouble(Console.ReadLine());
+                liczba2 = 0;
+                
+            }
+            else if (wybor == 9)
+            {
                 Console.WriteLine("End.");
                 break;
             }
@@ -79,7 +89,7 @@ class Kalkulator
                     wynik = Mnozenie(liczba1, liczba2);
                     break;
                 case 4:
-                    wynik = Dzielenie(liczba1, liczba2);
+                    wynik = Dzielenie(liczba1, liczba2); 
                     break;
                 case 5:
                     wynik = Potega(liczba1, liczba2);
@@ -89,6 +99,9 @@ class Kalkulator
                     break;
                 case 7:
                     wynik = Log(liczba1, liczba2);
+                    break;
+                case 8:
+                    wynik = AbsVal(liczba1);
                     break;
                 default:
                     Console.WriteLine("Incorrect operation selection.");
@@ -141,6 +154,11 @@ class Kalkulator
     {
         
         return Math.Log(b, a);
+    }
+
+    static double AbsVal(double a)
+    {
+        return Math.Abs(a);
     }
 
 }
