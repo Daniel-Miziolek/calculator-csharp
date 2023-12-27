@@ -12,7 +12,7 @@ class Kalkulator
             Console.WriteLine("3. Multiplication");
             Console.WriteLine("4. Division");
             Console.WriteLine("5. Exponentiation");
-            Console.WriteLine("6. Elementation");
+            Console.WriteLine("6. Root");
             Console.WriteLine("7. Logarithm");
             Console.WriteLine("8. Exit");
              
