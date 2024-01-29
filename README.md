@@ -20,4 +20,4 @@ This C# program reads a series of mathematical operations from the console input
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Daniel-Miziolek/calculator-Csharp.git
+   git clone https://github.com/Daniel-Miziolek/calculator-CSharp.git
