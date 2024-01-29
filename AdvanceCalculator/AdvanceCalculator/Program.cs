@@ -1,114 +1,142 @@
 ﻿using System;
-using static System.Net.Mime.MediaTypeNames;
+using System.Collections.Generic;
 
 class Program
 {
     static void Main(string[] args)
     {
-        string operation = Console.ReadLine();
-        Interpret(operation);
-
-    }
-
-    static void Interpret(string operation)
-    {
-        
-
-        List<string> lines = new List<string>(operation.Split('\n'));
-
-
-
-        foreach (string line in lines)
+        while (true)
         {
-
-            List<string> tokens = new List<string>(line.Split(' '));
-
-            double a;
-            double b;
-
-            if (tokens[0] == "pi")
-            {
-                tokens[0] = "3,14";
-            }            
-            if (tokens[1] == "pi")
-            {
-                tokens[1] = "3,14";
-            }
-            if (tokens[2] == "pi")
-            {
-                tokens[2] = "3,14";
-            }
-
-
-
-            if (tokens[1] == "+")
-            {
-                a = double.Parse(tokens[0]);
-                b = double.Parse(tokens[2]);
-                double result = a + b;
-                Console.WriteLine(">> " + result);
-            }
-            else if (tokens[1] == "-")
-            {
-                a = double.Parse(tokens[0]);
-                b = double.Parse(tokens[2]);
-                double result = a - b;
-                Console.WriteLine(">> " + result);
-            }
-            else if (tokens[1] == "*")
-            {
-                a = double.Parse(tokens[0]);
-                b = double.Parse(tokens[2]);
-                double result = a * b;
-                Console.WriteLine(">> " + result);
-            }
-            else if (tokens[1] == "/")
-            {
-                a = double.Parse(tokens[0]);
-                b = double.Parse(tokens[2]);
-                double result = a / b;
-                Console.WriteLine(">> " + result);
-            }
-            else if (tokens[1] == "^")
-            {
-                a = double.Parse(tokens[0]);
-                b = double.Parse(tokens[2]);
-                
-                double result = (double)Math.Pow(a, b);
-
-                Console.WriteLine(">> " + result);
-            }
-            else if (tokens[1] == "root")
-            {
-                a = double.Parse(tokens[0]);
-                b = double.Parse(tokens[2]);
-                double result = Math.Pow(a, 1.0 / b);
-                Console.WriteLine(">> " + result);
-
-            }
-            else if (tokens[0] == "|" && tokens[2] == "|")
-            {
-                a = double.Parse(tokens[1]);
-                double result = (double)Math.Abs(a);
-                Console.WriteLine(">> " + result);
-            }
-            else if (tokens[0] == "log_10")
-            {
-                a = double.Parse(tokens[1]);
-                double result = (double)Math.Log10(a);
-                Console.WriteLine(">> " + result);
-            }
-            else if (tokens[0] == "log_2")
-            {
-                a = double.Parse(tokens[1]);
-                double result = (double)Math.Log2(a);
-                Console.WriteLine(">> " + result);
-            }
-
+            Console.WriteLine("Enter an expression:");
+            string operation = Console.ReadLine();
+            double result = Interpret(operation);
+            Console.WriteLine("Result: " + result);
         }
     }
 
-    
+    static double Interpret(string operation)
+    {
+        List<string> tokens = Tokenize(operation);
+        return Evaluate(tokens);
+    }
 
+    static List<string> Tokenize(string operation)
+    {
+        List<string> tokens = new List<string>();
+        string[] operators = { "+", "-", "*", "/", "^", "sqrt", "|", "log_10", "log_2" };
 
+        foreach (char character in operation)
+        {
+            if (char.IsDigit(character) || character == '.' || character == ',')
+            {
+                if (tokens.Count == 0 || !char.IsDigit(tokens[tokens.Count - 1][0]))
+                {
+                    tokens.Add(character.ToString());
+                }
+                else
+                {
+                    tokens[tokens.Count - 1] += character;
+                }
+            }
+            else if (char.IsLetter(character))
+            {
+                tokens.Add(character.ToString());
+            }
+            else if (Array.Exists(operators, op => op.StartsWith(character.ToString())))
+            {
+                tokens.Add(character.ToString());
+            }
+            else if (character == '(' || character == ')')
+            {
+                tokens.Add(character.ToString());
+            }
+        }
+
+        return tokens;
+    }
+
+    static double Evaluate(List<string> tokens)
+    {
+        int index = 0;
+        return ParseExpression(tokens, ref index);
+    }
+
+    static double ParseExpression(List<string> tokens, ref int index)
+    {
+        double left = ParseTerm(tokens, ref index);
+        while (index < tokens.Count && (tokens[index] == "+" || tokens[index] == "-"))
+        {
+            string op = tokens[index++];
+            double right = ParseTerm(tokens, ref index);
+
+            if (op == "+")
+                left += right;
+            else if (op == "-")
+                left -= right;
+        }
+        return left;
+    }
+
+    static double ParseTerm(List<string> tokens, ref int index)
+    {
+        double left = ParseFactor(tokens, ref index);
+        while (index < tokens.Count && (tokens[index] == "*" || tokens[index] == "/"))
+        {
+            string op = tokens[index++];
+            double right = ParseFactor(tokens, ref index);
+
+            if (op == "*")
+                left *= right;
+            else if (op == "/")
+                left /= right;
+        }
+        return left;
+    }
+
+    static double ParseFactor(List<string> tokens, ref int index)
+    {
+        double result = 0.0;
+
+        if (index < tokens.Count)
+        {
+            string token = tokens[index++];
+
+            if (double.TryParse(token, out result))
+            {
+                // It's a number
+            }
+            else if (token == "(")
+            {
+                result = ParseExpression(tokens, ref index);
+                if (index < tokens.Count && tokens[index] == ")")
+                {
+                    index++; // Consume the closing parenthesis
+                }
+            }
+            else if (token == "pi")
+            {
+                result = Math.PI;
+            }
+            else if (token == "|")
+            {
+                result = Math.Abs(ParseFactor(tokens, ref index));
+                if (index < tokens.Count && tokens[index] == "|")
+                {
+                    index++; // Consume the closing absolute value bars
+                }
+            }
+            else if (token == "log_10")
+            {
+                double operand = ParseFactor(tokens, ref index);
+                result = Math.Log10(operand);
+            }
+            else if (token == "log_2")
+            {
+                double operand = ParseFactor(tokens, ref index);
+                result = Math.Log2(operand);
+            }
+        }
+
+        return result;
+    }
 }
