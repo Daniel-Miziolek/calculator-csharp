@@ -8,8 +8,8 @@ This C# program reads a series of mathematical operations from the console input
 
 ## Examples
 
-    2 + 2
-    >> 4
+    ( 2 + 2 ) * 2
+    >> 8
 
   
    
